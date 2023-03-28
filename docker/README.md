@@ -68,6 +68,49 @@ The following provides you a quick way to get Certbot set up and running as an O
     ```sh
     oc get route -n $NAMESPACE -l certbot-managed=true -o=jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}'
     ```
+1. Creating Persistent Volume:
+
+    For example:
+    ```yaml
+    # cat pvc.yaml
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+        name: certbot
+    spec:
+        metadata:
+        labels:
+            app: certbot
+        storageClassName: netapp-file-standard
+        accessModes:
+        - ReadWriteMany
+        resources:
+        requests:
+        storage: 64Mi
+    ```
+    
+    For the IBM Cloud, for example:
+    ```yaml
+    # cat pvc.yaml
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+        name: certbot
+    spec:
+        metadata:
+        labels:
+            app: certbot
+        storageClassName: ibmc-file-bronze-gid
+        accessModes:
+        - ReadWriteMany
+        resources:
+        requests:
+        storage: 20Gi
+    ```
+
+    ```sh
+    oc create -n $NAMESPACE -f pvc.yaml
+    ```
 
 1. Install Certbot to your project/namespace by processing `certbot.dc.yaml` to create the CronJob and supporting objects (ServiceAccount, RoleBinding, PVC, etc).
 
