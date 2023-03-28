@@ -124,6 +124,8 @@ objects:
                       value: "${CERTBOT_SUBSET}"
                     - name: CERTBOT_CERT_PER_HOST
                       value: "${CERTBOT_CERT_PER_HOST}"
+                    - name: CERTBOT_CLAIM_NAME
+                      value: "${CERTBOT_CLAIM_NAME}"
                   resources:
                     requests:
                       cpu: 50m
@@ -137,7 +139,7 @@ objects:
               volumes:
                 - name: certbot-config
                   persistentVolumeClaim:
-                    claimName: certbot
+                    claimName: "${CERTBOT_CLAIM_NAME}"
       schedule: "${CRON_SCHEDULE}"
       suspend: "${{CRON_SUSPEND}}"
 
@@ -182,6 +184,11 @@ parameters:
     description: Manage an individual certificate per unique managed host (domain name), if true, otherwise, manage a single certificate for all managed hosts (domain names)
     required: true
     value: "false"
+
+  - name: CERTBOT_CLAIM_NAME
+    description: Select the name of the volume claim.
+    required: true
+    value: "certbot"
 
   - name: CRON_SCHEDULE
     description: Cronjob Schedule
