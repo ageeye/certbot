@@ -81,18 +81,6 @@ objects:
       - kind: ServiceAccount
         name: certbot
 
-  - apiVersion: v1
-    kind: PersistentVolumeClaim
-    metadata:
-      name: certbot
-    spec:
-      storageClassName: netapp-file-standard
-      accessModes:
-        - ReadWriteMany
-      resources:
-        requests:
-          storage: 64Mi
-
   - apiVersion: batch/v1
     kind: CronJob
     metadata:
