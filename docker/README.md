@@ -79,11 +79,11 @@ The following provides you a quick way to get Certbot set up and running as an O
         name: certbot
     spec:
         metadata:
-        labels:
-            app: certbot
+            labels:
+                app: certbot
         storageClassName: netapp-file-standard
         accessModes:
-        - ReadWriteMany
+            - ReadWriteMany
         resources:
         requests:
         storage: 64Mi
@@ -98,11 +98,11 @@ The following provides you a quick way to get Certbot set up and running as an O
         name: certbot
     spec:
         metadata:
-        labels:
-            app: certbot
+            labels:
+                app: certbot
         storageClassName: ibmc-file-bronze-gid
         accessModes:
-        - ReadWriteMany
+            - ReadWriteMany
         resources:
         requests:
         storage: 20Gi
