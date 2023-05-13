@@ -19,7 +19,7 @@ RUN apk add --no-cache --virtual certbot-build gcc libc-dev libffi-dev \
 
 # Install Openshift CLI
 RUN apk add --no-cache --virtual oc-build curl tar \
- && curl -sfL https://mirror.openshift.com/pub/openshift-v4/clients/ocp/stable-4.10/openshift-client-linux.tar.gz | tar -zxvf - -C ${APP_ROOT} \
+ && curl -sfL https://mirror.openshift.com/pub/openshift-v4/clients/ocp/stable-4.12/openshift-client-linux.tar.gz | tar -zxvf - -C ${APP_ROOT} \
  && apk del oc-build \
  && rm -rf /var/cache/apk/*
 
